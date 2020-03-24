@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-
-    {{ room_name|json_script:"room-name" }}
-
+{% extends 'chat/base.html' %}
+{% block content %}
+	<div class="row">
+		<div class="col-sm-8">
+			<textarea readonly id="chat-log" rows="10" class="form-control" style="margin-top: 20px; background-color: #00FFFF;"></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8">
+			 <input id="chat-message-input" type="text" size="100" class="form-control-plaintext" style="margin-top: 20px;" placeholder="Type a message...">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8">
+			 <input  id="chat-message-submit" type="button" value="Send" class="btn btn-outline-primary float-right" style="margin-top: 20px;">
+		</div>
+	</div>
+   
     <script>
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+   
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
-            + '/ws/chat/'
-            + roomName
             + '/'
         );
 
@@ -47,5 +49,4 @@
             messageInputDom.value = '';
         };
     </script>
-</body>
-</html>
+{% endblock content %}
