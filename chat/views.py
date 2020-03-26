@@ -9,4 +9,3 @@ def room(request):
      'messages': messages
     }
     return render(request, 'chat/room.html', context)
-	   
